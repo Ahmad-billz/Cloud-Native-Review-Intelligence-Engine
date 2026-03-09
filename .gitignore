@@ -1,0 +1,91 @@
+# ---- OS / Editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.iml
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg*
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+.venv/
+venv/
+.env
+.env.*
+.envrc
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage*
+htmlcov/
+.cache/
+
+# ---- Notebooks ----
+*.ipynb_checkpoints
+
+# ---- Node (if any UI utilities) ----
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---- Terraform ----
+*.tfstate
+*.tfstate.*
+.terraform/
+.crash
+*.tfvars
+*.auto.tfvars
+*_override.tf
+override.tf
+override.tf.json
+.terraformrc
+terraform.rc
+.terraform.lock.hcl
+
+# ---- Airflow ----
+airflow_home/
+logs/
+dags/__pycache__/
+dags/*.pyc
+**/airflow.db
+**/unittests.cfg
+
+# ---- Docker ----
+*.pid
+*.log
+docker-compose.override.yml
+.env.docker
+
+# ---- dbt ----
+target/
+dbt_modules/
+dbt_packages/
+logs/
+
+# ---- Snowflake Keys / SSH ----
+*.p8
+*.pem
+*.pub
+*.key
+*.p12
+
+# ---- Secrets / Credentials ----
+secrets/
+.secrets/
+*.crt
+*.json
+*.yaml.enc
+
+# ---- Data (generated or downloaded) ----
+data/
+tmp/
+temp/
+*.parquet
+*.csv
+*.jsonl
