@@ -64,6 +64,14 @@ resource "aws_iam_role" "snowflake_integration" {
   tags = {
     project = var.project
   }
+
+  # The role is created with a broad trust so Snowflake can finish generating
+  # its IAM user ARN + external ID. After that, update_trust.py tightens the
+  # policy to the exact Snowflake principal. Ignore later drift here so
+  # subsequent applies do not overwrite the tightened trust back to broad.
+  lifecycle {
+    ignore_changes = [assume_role_policy]
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "attach_read" {
@@ -84,9 +92,10 @@ resource "snowflake_storage_integration" "capstone" {
 # Null resource to run a local script that tightens role trust based on Snowflake outputs
 resource "null_resource" "tighten_trust" {
   triggers = {
+    integration_name = snowflake_storage_integration.capstone.name
     sf_user_arn = try(snowflake_storage_integration.capstone.storage_aws_iam_user_arn, "")
     sf_external = try(snowflake_storage_integration.capstone.storage_aws_external_id, "")
-    role_name   = aws_iam_role.snowflake_integration.name
+    role_name        = aws_iam_role.snowflake_integration.name
   }
 
   depends_on = [
