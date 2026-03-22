@@ -89,3 +89,6 @@ temp/
 *.parquet
 *.csv
 *.jsonl
+
+.user.yml
+assets/
